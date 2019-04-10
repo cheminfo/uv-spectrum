@@ -1,4 +1,4 @@
-import { TRANSMITTANCE, ABSORBANCE, PERCENT_TRANSMITTANCE } from './constants';
+import { PERCENT_TRANSMITTANCE } from './constants';
 
 export class Spectra {
   constructor(options = {}) {
