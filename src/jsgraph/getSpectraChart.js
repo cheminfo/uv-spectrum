@@ -1,4 +1,4 @@
-export function getSpectraChart(spectra, options = {}) {
+export function getSpectraChart(spectra) {
   let chart = {
     title: 'UV spectra superimposition',
     data: []
