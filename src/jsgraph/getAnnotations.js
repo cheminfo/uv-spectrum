@@ -36,8 +36,8 @@ export function getAnnotations(spectrum, options = {}) {
 function annotationTransmittance(annotation, peak, factor = 1) {
   annotation.label = [
     {
-      text: peak.kind,
-      size: '18px',
+      text: String(peak.wavelength),
+      size: '12px',
       anchor: 'middle',
       color: 'red',
       position: {
@@ -66,7 +66,7 @@ function annotationTransmittance(annotation, peak, factor = 1) {
 function annotationAbsorbance(annotation, peak) {
   annotation.label = [
     {
-      text: peak.kind,
+      text: String(peak.wavelength),
       size: '18px',
       anchor: 'middle',
       color: 'red',

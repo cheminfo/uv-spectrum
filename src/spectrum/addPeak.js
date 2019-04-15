@@ -25,23 +25,7 @@ export function addPeak(spectrum, peak = {}) {
   spectrum.peaks.push({
     wavelength: wavelength,
     transmittance: transmittance,
-    absorbance: absorbance,
-    kind: getPeakKind(
-      transmittance,
-      spectrum.minTransmittance,
-      spectrum.maxTransmittance
-    )
+    absorbance: absorbance
   });
   return peak;
-}
-
-function getPeakKind(transmittance, minTransmittance, maxTransmittance) {
-  var position =
-    (maxTransmittance - transmittance) / (maxTransmittance - minTransmittance);
-  if (position < 0.33) {
-    return 'w';
-  } else if (position < 0.66) {
-    return 'm';
-  }
-  return 'S';
 }
