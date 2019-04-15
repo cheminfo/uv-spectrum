@@ -11,14 +11,13 @@ let text = `
   `;
 describe('Test addPeaks', () => {
   it('default options', () => {
-    let irSpectrum = fromText(text);
+    let uvSpectrum = fromText(text);
 
-    expect(irSpectrum.peaks).toStrictEqual([]);
-    irSpectrum.peakPicking(3);
-    expect(irSpectrum.peaks).toStrictEqual([
+    expect(uvSpectrum.peaks).toStrictEqual([]);
+    uvSpectrum.peakPicking(3);
+    expect(uvSpectrum.peaks).toStrictEqual([
       {
         absorbance: 0.3010299956639812,
-        kind: 'm',
         transmittance: 0.5,
         wavelength: 3
       }
@@ -26,14 +25,13 @@ describe('Test addPeaks', () => {
   });
 
   it('large range', () => {
-    let irSpectrum = fromText(text);
+    let uvSpectrum = fromText(text);
 
-    irSpectrum.peaks = [];
-    irSpectrum.peakPicking(3, { range: 10 });
-    expect(irSpectrum.peaks).toStrictEqual([
+    uvSpectrum.peaks = [];
+    uvSpectrum.peakPicking(3, { range: 10 });
+    expect(uvSpectrum.peaks).toStrictEqual([
       {
         absorbance: 0.6989700043360187,
-        kind: 'S',
         transmittance: 0.2,
         wavelength: 6
       }
@@ -41,14 +39,13 @@ describe('Test addPeaks', () => {
   });
 
   it('small range', () => {
-    let irSpectrum = fromText(text);
+    let uvSpectrum = fromText(text);
 
-    irSpectrum.peaks = [];
-    irSpectrum.peakPicking(4, { range: 1 });
-    expect(irSpectrum.peaks).toStrictEqual([
+    uvSpectrum.peaks = [];
+    uvSpectrum.peakPicking(4, { range: 1 });
+    expect(uvSpectrum.peaks).toStrictEqual([
       {
         absorbance: 0.3010299956639812,
-        kind: 'm',
         transmittance: 0.5,
         wavelength: 3
       }
@@ -56,20 +53,18 @@ describe('Test addPeaks', () => {
   });
 
   it('test optimize', () => {
-    let irSpectrum = fromText(text);
+    let uvSpectrum = fromText(text);
 
-    irSpectrum.peakPicking(7, { optimize: true });
-    irSpectrum.peakPicking(1, { optimize: true });
-    expect(irSpectrum.peaks).toStrictEqual([
+    uvSpectrum.peakPicking(7, { optimize: true });
+    uvSpectrum.peakPicking(1, { optimize: true });
+    expect(uvSpectrum.peaks).toStrictEqual([
       {
         absorbance: 0.6989700043360187,
-        kind: 'S',
         transmittance: 0.2,
         wavelength: 6
       },
       {
         absorbance: 0.3010299956639812,
-        kind: 'm',
         transmittance: 0.5,
         wavelength: 3
       }
@@ -77,14 +72,13 @@ describe('Test addPeaks', () => {
   });
 
   it('test duplicate', () => {
-    let irSpectrum = fromText(text);
+    let uvSpectrum = fromText(text);
 
-    irSpectrum.peakPicking(3, { range: 1 });
-    irSpectrum.peakPicking(3, { optimize: true });
-    expect(irSpectrum.peaks).toStrictEqual([
+    uvSpectrum.peakPicking(3, { range: 1 });
+    uvSpectrum.peakPicking(3, { optimize: true });
+    expect(uvSpectrum.peaks).toStrictEqual([
       {
         absorbance: 0.3010299956639812,
-        kind: 'm',
         transmittance: 0.5,
         wavelength: 3
       }
