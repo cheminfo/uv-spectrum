@@ -1,94 +1,101 @@
-import { ABSORBANCE, TRANSMITTANCE, PERCENT_TRANSMITTANCE } from '../constants';
+/**
+ * @typedef {Object} Peak
+ * @property {number} wavenumber
+ * @property {number} transmittance
+ * @property {number} intensity
+ * @property {number} kind
+ * @property {number} assignment
+ */
 
-export function getAnnotations(spectrum, options = {}) {
-  const { fillColor = 'green', strokeColor = 'red', creationFct } = options;
-  const peaks = spectrum.peaks;
-  if (!peaks) return [];
+/**
+ * Creates annotations for jsgraph that allows to display the result of peak picking
+ * @param {array<Peak>} peaks
+ * @param {object} [options={}]
+ * @param {string} [options.fillColor='green']
+ * @param {string} [options.strokeColor='red']
+ * @param {string} [options.showKind=true] Display the kind, 'm', 'w', 'S'
+ * @param {string} [options.showAssignment=true] Display the assignment
+ * @param {function} [options.createFct] (annotation, peak) => {}: callback allowing to add properties
+ * @returns array
+ */
+
+export function getAnnotations(peaks, options = {}) {
+  const {
+    fillColor = 'green',
+    strokeColor = 'red',
+    creationFct,
+  } = options;
   let annotations = peaks.map((peak) => {
-    var annotation = {
+    let annotation = {
       line: 1,
       type: 'rect',
       strokeColor: strokeColor,
       strokeWidth: 0,
-      fillColor: fillColor
+      fillColor: fillColor,
     };
     if (creationFct) {
       creationFct(annotation, peak);
     }
-    switch (spectrum.mode) {
-      case ABSORBANCE:
-        annotationAbsorbance(annotation, peak);
-        break;
-      case TRANSMITTANCE:
-        annotationTransmittance(annotation, peak, 1);
-        break;
-      case PERCENT_TRANSMITTANCE:
-        annotationTransmittance(annotation, peak, 100);
-        break;
-      default:
-    }
+        annotationAbsorbance(annotation, peak, options);
     return annotation;
   });
-
   return annotations;
 }
 
-function annotationTransmittance(annotation, peak, factor = 1) {
-  annotation.label = [
-    {
-      text: String(peak.wavelength),
-      size: '12px',
-      anchor: 'middle',
-      color: 'red',
-      position: {
-        x: peak.wavelength,
-        y: peak.transmittance * factor,
-        dy: '23px'
-      }
-    }
-  ];
-  annotation.position = [
-    {
-      x: peak.wavelength,
-      y: peak.transmittance * factor,
-      dy: '10px',
-      dx: '-1px'
-    },
-    {
-      x: peak.wavelength,
-      y: peak.transmittance * factor,
-      dy: '5px',
-      dx: '1px'
-    }
-  ];
-}
+function annotationAbsorbance(annotation, peak, options = {}) {
+  const {
+    showKind = true,
+    showAssignment = true,
+    assignmentAngle = -45,
+  } = options;
+  let labels = [];
+  let line = 0;
 
-function annotationAbsorbance(annotation, peak) {
-  annotation.label = [
-    {
-      text: String(peak.wavelength),
+  if (showKind) {
+    labels.push({
+      text: peak.kind,
       size: '18px',
       anchor: 'middle',
       color: 'red',
       position: {
-        x: peak.wavelength,
-        y: peak.absorbance,
-        dy: '-15px'
-      }
-    }
-  ];
+        x: peak.wavenumber,
+        y: peak.intensity,
+        dy: `${-15 - line * 14}px`,
+      },
+    });
+    line++;
+  }
+
+  if (showAssignment) {
+    labels.push({
+      text: peak.assignment,
+      size: '18px',
+      angle: assignmentAngle,
+      anchor: 'left',
+      color: 'darkred',
+      position: {
+        x: peak.wavenumber,
+        y: peak.intensity,
+        dy: `${-15 - line * 14}px`,
+      },
+    });
+    line++;
+  }
+
+  annotation.labels = labels;
+
   annotation.position = [
     {
-      x: peak.wavelength,
-      y: peak.absorbance,
+      x: peak.wavenumber,
+      y: peak.intensity,
       dy: '-10px',
-      dx: '-1px'
+      dx: '-1px',
     },
     {
-      x: peak.wavelength,
-      y: peak.absorbance,
+      x: peak.wavenumber,
+      y: peak.intensity,
       dy: '-5px',
-      dx: '1px'
-    }
+      dx: '1px',
+    },
   ];
 }

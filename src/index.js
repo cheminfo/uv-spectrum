@@ -1,5 +1,14 @@
-export { Spectrum } from './Spectrum';
-export { Spectra } from './Spectra';
-export { fromJcamp } from './from/jcamp';
-export { fromText } from './from/text';
-export { ABSORBANCE, TRANSMITTANCE, PERCENT_TRANSMITTANCE } from './constants';
+import { JSGraph as OriginalJSGraph } from 'common-spectrum';
+
+import { getAnnotations } from './jsgraph/getAnnotations';
+
+export {
+  Analysis,
+  AnalysesManager,
+  toJcamp,
+  peakPicking,
+  autoPeakPicking,
+  fromJcamp,
+} from 'common-spectrum';
+
+export const JSGraph = { ...OriginalJSGraph, getAnnotations };

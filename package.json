@@ -1,6 +1,6 @@
 {
   "name": "uv-spectrum",
-  "version": "0.0.4",
+  "version": "0.2.0",
   "description": "",
   "main": "lib/index.js",
   "module": "src/index.js",
@@ -9,13 +9,13 @@
     "src"
   ],
   "scripts": {
-    "build": "rollup -c && cheminfo build --root IRSpectrum --no-uglify",
+    "build": "cheminfo-build  --entry src/index.js --root UVSpectrum",
     "build-doc": "cheminfo doc",
     "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
     "prepublishOnly": "rollup -c",
-    "test": "run-s test-only eslint",
-    "test-travis": "eslint src && jest --coverage && codecov",
+    "test": "npm run test-coverage && npm run eslint",
+    "test-coverage": "jest --coverage",
     "test-only": "jest"
   },
   "repository": {
@@ -33,23 +33,45 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/types": "^7.4.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "codecov": "^3.3.0",
-    "eslint": "^5.16.0",
-    "eslint-config-cheminfo": "^1.20.1",
-    "eslint-plugin-import": "^2.17.1",
-    "eslint-plugin-jest": "^22.4.1",
-    "jest": "^24.7.1",
-    "npm-run-all": "^4.1.5",
-    "rollup": "^1.10.0"
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@types/jest": "^26.0.24",
+    "cheminfo-build": "^1.1.11",
+    "codecov": "^3.8.2",
+    "eslint": "^7.30.0",
+    "eslint-config-cheminfo": "^5.2.4",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-prettier": "^3.4.0",
+    "esm": "^3.2.25",
+    "jest": "^27.0.6",
+    "jest-matcher-deep-close-to": "^2.0.1",
+    "prettier": "^2.3.2",
+    "rollup": "^2.53.1"
   },
   "dependencies": {
-    "jcampconverter": "^3.0.1",
-    "ml-array-max": "^1.1.1",
-    "ml-array-min": "^1.1.1",
-    "ml-array-utils": "^0.4.0",
-    "ml-array-xy-equally-spaced": "^0.2.4",
-    "xy-parser": "^2.2.2"
+    "common-spectrum": "0.38.0",
+    "ml-gsd": "^6.6.3"
+  },
+  "info": {
+    "logo": "https://raw.githubusercontent.com/cheminfo/font/master/src/uv/assignment.svg",
+    "domain": [
+      "Physical Chemistry",
+      "Materials Science",
+      "Organic Chemistry"
+    ],
+    "technique": {
+      "name": "UV",
+      "chmo": "0002515",
+      "iupac": "https://goldbook.iupac.org/terms/view/L03477"
+    },
+    "functionality": {
+      "fileTypes": [
+        {
+          "extension": "jdx",
+          "manufacturer": "IUPAC",
+          "example": "https://raw.githubusercontent.com/cheminfo/uv-spectrum/master/src/from/__tests__/data/adamantan.jdx"
+        }
+      ]
+    }
   }
 }
