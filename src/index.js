@@ -9,6 +9,7 @@ export {
   peakPicking,
   autoPeakPicking,
   fromJcamp,
+  fromText,
 } from 'common-spectrum';
 
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };
