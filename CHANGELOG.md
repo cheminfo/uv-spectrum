@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/cheminfo/uv-spectrum/compare/v0.2.0...v0.2.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* getAnnotations deals with wavelength and absorbance ([6ac10e7](https://www.github.com/cheminfo/uv-spectrum/commit/6ac10e7851da0c23e2519985cdfdc61af2d72927))
+
 ## [0.2.0](https://www.github.com/cheminfo/uv-spectrum/compare/v0.1.0...v0.2.0) (2021-07-20)
 
 
