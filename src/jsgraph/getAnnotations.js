@@ -1,8 +1,7 @@
 /**
  * @typedef {Object} Peak
- * @property {number} wavenumber
- * @property {number} transmittance
- * @property {number} intensity
+ * @property {number} wavelength
+ * @property {number} absorbance
  * @property {number} kind
  * @property {number} assignment
  */
@@ -20,11 +19,7 @@
  */
 
 export function getAnnotations(peaks, options = {}) {
-  const {
-    fillColor = 'green',
-    strokeColor = 'red',
-    creationFct,
-  } = options;
+  const { fillColor = 'green', strokeColor = 'red', creationFct } = options;
   let annotations = peaks.map((peak) => {
     let annotation = {
       line: 1,
@@ -36,7 +31,7 @@ export function getAnnotations(peaks, options = {}) {
     if (creationFct) {
       creationFct(annotation, peak);
     }
-        annotationAbsorbance(annotation, peak, options);
+    annotationAbsorbance(annotation, peak, options);
     return annotation;
   });
   return annotations;
@@ -58,8 +53,8 @@ function annotationAbsorbance(annotation, peak, options = {}) {
       anchor: 'middle',
       color: 'red',
       position: {
-        x: peak.wavenumber,
-        y: peak.intensity,
+        x: peak.wavelength,
+        y: peak.absorbance,
         dy: `${-15 - line * 14}px`,
       },
     });
@@ -74,8 +69,8 @@ function annotationAbsorbance(annotation, peak, options = {}) {
       anchor: 'left',
       color: 'darkred',
       position: {
-        x: peak.wavenumber,
-        y: peak.intensity,
+        x: peak.wavelength,
+        y: peak.absorbance,
         dy: `${-15 - line * 14}px`,
       },
     });
@@ -86,14 +81,14 @@ function annotationAbsorbance(annotation, peak, options = {}) {
 
   annotation.position = [
     {
-      x: peak.wavenumber,
-      y: peak.intensity,
+      x: peak.wavelength,
+      y: peak.absorbance,
       dy: '-10px',
       dx: '-1px',
     },
     {
-      x: peak.wavenumber,
-      y: peak.intensity,
+      x: peak.wavelength,
+      y: peak.absorbance,
       dy: '-5px',
       dx: '1px',
     },
