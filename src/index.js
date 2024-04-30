@@ -8,8 +8,9 @@ export {
   toJcamp,
   peakPicking,
   autoPeakPicking,
-  fromJcamp,
   fromText,
 } from 'common-spectrum';
+
+export { fromJcamp } from './from/fromJcamp';
 
 export const JSGraph = { ...OriginalJSGraph, getAnnotations };
