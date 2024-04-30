@@ -24,9 +24,9 @@ export function getAnnotations(peaks, options = {}) {
     let annotation = {
       line: 1,
       type: 'rect',
-      strokeColor: strokeColor,
+      strokeColor,
       strokeWidth: 0,
-      fillColor: fillColor,
+      fillColor,
     };
     if (creationFct) {
       creationFct(annotation, peak);
