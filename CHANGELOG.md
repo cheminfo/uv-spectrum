@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/cheminfo/uv-spectrum/compare/v0.2.1...v0.3.0) (2024-04-30)
+
+
+### Features
+
+* deal with reflectance ([c0ae8b9](https://github.com/cheminfo/uv-spectrum/commit/c0ae8b9a37236c819662a80eb5a6e04170df1fcc))
+* update dependencies and github actions ([adfdcbe](https://github.com/cheminfo/uv-spectrum/commit/adfdcbe50018d63edcf93c320885aa717c4fdd1b))
+
 ### [0.2.1](https://www.github.com/cheminfo/uv-spectrum/compare/v0.2.0...v0.2.1) (2021-07-20)
 
 
