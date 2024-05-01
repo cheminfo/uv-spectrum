@@ -24,11 +24,10 @@ function parseReflectance(variables) {
   variables.k = {
     data: variables.r.data.map((reflectance) => {
       const absolute = reflectance / 100;
-      return (1 - absolute ** 2) / (2 * absolute);
+      return ((1 - absolute) ** 2) / (2 * absolute);
     }),
-
     symbol: 'k',
-    label: 'Kubelka-Munk Function',
+    label: ' F(R)',
     units: '',
   };
 
@@ -46,8 +45,8 @@ function parseReflectance(variables) {
 
   variables.c = {
     symbol: 'c',
-    label: 'Tauc',
-    units: '',
+    label: '(F(R) * h * v)^1/2', // factor 2 is a specific case
+    units: '√J',
     data: [],
   };
   for (let i = 0; i < variables.k.data.length; i++) {
@@ -76,7 +75,7 @@ function parseAbsorbance(variables) {
   } else {
     const factor =
       yVariable.label.includes('%') ||
-      yVariable.label.toLowerCase().includes('percent')
+        yVariable.label.toLowerCase().includes('percent')
         ? 100
         : 1;
 
