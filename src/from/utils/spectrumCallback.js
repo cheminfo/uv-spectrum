@@ -24,7 +24,7 @@ function parseReflectance(variables) {
   variables.k = {
     data: variables.r.data.map((reflectance) => {
       const absolute = reflectance / 100;
-      return ((1 - absolute) ** 2) / (2 * absolute);
+      return (1 - absolute) ** 2 / (2 * absolute);
     }),
     symbol: 'k',
     label: ' F(R)',
@@ -75,7 +75,7 @@ function parseAbsorbance(variables) {
   } else {
     const factor =
       yVariable.label.includes('%') ||
-        yVariable.label.toLowerCase().includes('percent')
+      yVariable.label.toLowerCase().includes('percent')
         ? 100
         : 1;
 
