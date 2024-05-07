@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/cheminfo/uv-spectrum/compare/v0.3.1...v0.4.0) (2024-05-07)
+
+
+### Features
+
+* expose toText ([8be1605](https://github.com/cheminfo/uv-spectrum/commit/8be16058e9525969fadb2180250657659ba713fb))
+* toText can normalize data ([1654542](https://github.com/cheminfo/uv-spectrum/commit/16545427343fc366ac1156ba6e03fdd883e7f8b7))
+
 ## [0.3.1](https://github.com/cheminfo/uv-spectrum/compare/v0.3.0...v0.3.1) (2024-05-01)
 
 
