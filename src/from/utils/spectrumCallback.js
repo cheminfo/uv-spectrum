@@ -45,15 +45,15 @@ function parseReflectance(variables) {
 
   variables.c = {
     symbol: 'c',
-    label: '(F(R) * h * v)^1/2', // factor 2 is a specific case
-    units: '√J',
+    label: '(F(R) / 100 * h * v / e)^1/2', // factor 2 is a specific case
+    units: 'Arbitrary units',
     data: [],
   };
   for (let i = 0; i < variables.k.data.length; i++) {
     const frequency = C / (variables.x.data[i] * 1e-9);
     const kmf = variables.k.data[i];
     const factor = 2;
-    const tauc = (kmf * H * frequency) ** (1 / factor);
+    const tauc = (kmf / 100 * H * frequency / E) ** (1 / factor);
     variables.c.data.push(tauc);
   }
 }
@@ -75,7 +75,7 @@ function parseAbsorbance(variables) {
   } else {
     const factor =
       yVariable.label.includes('%') ||
-      yVariable.label.toLowerCase().includes('percent')
+        yVariable.label.toLowerCase().includes('percent')
         ? 100
         : 1;
 
