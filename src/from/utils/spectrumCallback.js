@@ -53,7 +53,7 @@ function parseReflectance(variables) {
     const frequency = C / (variables.x.data[i] * 1e-9);
     const kmf = variables.k.data[i];
     const factor = 2;
-    const tauc = (kmf / 100 * H * frequency / E) ** (1 / factor);
+    const tauc = (((kmf / 100) * H * frequency) / E) ** (1 / factor);
     variables.c.data.push(tauc);
   }
 }
@@ -75,7 +75,7 @@ function parseAbsorbance(variables) {
   } else {
     const factor =
       yVariable.label.includes('%') ||
-        yVariable.label.toLowerCase().includes('percent')
+      yVariable.label.toLowerCase().includes('percent')
         ? 100
         : 1;
 
