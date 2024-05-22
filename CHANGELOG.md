@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/cheminfo/uv-spectrum/compare/v0.4.0...v0.4.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* units and calculation of Tauc ([c5fb043](https://github.com/cheminfo/uv-spectrum/commit/c5fb0435d350bd2775ccad8fccafa291ca0ed6fd))
+
 ## [0.4.0](https://github.com/cheminfo/uv-spectrum/compare/v0.3.1...v0.4.0) (2024-05-07)
 
 
