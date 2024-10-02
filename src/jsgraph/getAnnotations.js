@@ -1,5 +1,5 @@
 /**
- * @typedef {Object} Peak
+ * @typedef {object} Peak
  * @property {number} wavelength
  * @property {number} absorbance
  * @property {number} kind
@@ -8,13 +8,13 @@
 
 /**
  * Creates annotations for jsgraph that allows to display the result of peak picking
- * @param {array<Peak>} peaks
+ * @param {Array<Peak>} peaks
  * @param {object} [options={}]
  * @param {string} [options.fillColor='green']
  * @param {string} [options.strokeColor='red']
- * @param {string} [options.showKind=true] Display the kind, 'm', 'w', 'S'
- * @param {string} [options.showAssignment=true] Display the assignment
- * @param {function} [options.createFct] (annotation, peak) => {}: callback allowing to add properties
+ * @param {string} [options.showKind=true] - Display the kind, 'm', 'w', 'S'
+ * @param {string} [options.showAssignment=true] - Display the assignment
+ * @param {Function} [options.createFct] - (annotation, peak) => {}: callback allowing to add properties
  * @returns array
  */
 
