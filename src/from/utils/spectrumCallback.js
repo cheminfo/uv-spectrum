@@ -5,6 +5,8 @@ const C = 299792458; // speed of light (m / s)
 export function spectrumCallback(variables) {
   // we add missing absorbance / transmittance
   // variable a = absorbance
+  // variable e = energy
+  // variable c = tauc plot
   // variable t = transmittance
   // variable r = reflectance
   // variable k = Kubelka-Munk Function
@@ -75,7 +77,7 @@ function parseAbsorbance(variables) {
   } else {
     const factor =
       yVariable.label.includes('%') ||
-      yVariable.label.toLowerCase().includes('percent')
+        yVariable.label.toLowerCase().includes('percent')
         ? 100
         : 1;
 

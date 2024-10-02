@@ -46,7 +46,7 @@
     "rollup": "^4.24.0"
   },
   "dependencies": {
-    "common-spectrum": "2.8.0",
+    "common-spectrum": "2.9.0",
     "ml-gsd": "^12.1.8",
     "vitest": "^2.1.1"
   },

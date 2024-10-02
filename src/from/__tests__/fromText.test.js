@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { test, expect } from 'vitest'
 
-import { fromText } from '..';
+import { fromText } from '../..';
 
 test('fromText', () => {
   const arrayBuffer = readFileSync(join(__dirname, 'data/uv.txt'));
@@ -18,6 +18,7 @@ test('fromText', () => {
   });
 
   expect(analysis.spectra).toHaveLength(1);
+
 
   let first = analysis.spectra[0];
 
