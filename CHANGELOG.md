@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/cheminfo/uv-spectrum/compare/v0.4.1...v0.5.0) (2024-10-07)
+
+
+### Features
+
+* add toMatrix ([e8b7d25](https://github.com/cheminfo/uv-spectrum/commit/e8b7d254a8c0fdea74740938d83593337bfb7aff))
+
 ## [0.4.1](https://github.com/cheminfo/uv-spectrum/compare/v0.4.0...v0.4.1) (2024-05-22)
 
 
