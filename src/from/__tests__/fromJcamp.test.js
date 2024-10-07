@@ -1,10 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { getNormalizedSpectrum } from 'common-spectrum';
 import { test, expect } from 'vitest'
 
 import { fromJcamp } from '../..';
-import { AnalysesManager, getNormalizedSpectrum } from 'common-spectrum';
 
 test('fromJcamp', () => {
 
