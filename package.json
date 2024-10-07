@@ -35,9 +35,9 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.25.7",
     "@types/node": "^22.7.4",
-    "@vitest/coverage-v8": "^2.1.1",
+    "@vitest/coverage-v8": "^2.1.2",
     "cheminfo-build": "^1.2.0",
     "eslint": "^8.57.0",
     "eslint-config-cheminfo": "^11.1.2",
@@ -46,9 +46,9 @@
     "rollup": "^4.24.0"
   },
   "dependencies": {
-    "common-spectrum": "2.9.0",
+    "common-spectrum": "2.10.1",
     "ml-gsd": "^12.1.8",
-    "vitest": "^2.1.1"
+    "vitest": "^2.1.2"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/main/src/uv/assignment.svg",

@@ -7,6 +7,7 @@ export {
   AnalysesManager,
   toJcamp,
   toText,
+  toMatrix,
   peakPicking,
   autoPeakPicking,
   fromText,
