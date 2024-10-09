@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/cheminfo/uv-spectrum/compare/v0.5.0...v0.6.0) (2024-10-09)
+
+
+### Features
+
+* update dependencies ([7325a44](https://github.com/cheminfo/uv-spectrum/commit/7325a44eb50d3d82501620073b4a7f4e652a0f09))
+
 ## [0.5.0](https://github.com/cheminfo/uv-spectrum/compare/v0.4.1...v0.5.0) (2024-10-07)
 
 
