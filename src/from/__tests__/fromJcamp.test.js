@@ -2,12 +2,11 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { getNormalizedSpectrum } from 'common-spectrum';
-import { test, expect } from 'vitest'
+import { test, expect } from 'vitest';
 
 import { fromJcamp } from '../..';
 
 test('fromJcamp', () => {
-
   const arrayBuffer = readFileSync(join(__dirname, 'data/uv.jdx'));
   const analysis = fromJcamp(arrayBuffer, {
     info: {
@@ -18,7 +17,6 @@ test('fromJcamp', () => {
       dataType: 'UV spectrum',
     },
   });
-
 
   expect(analysis.spectra).toHaveLength(1);
 
@@ -32,9 +30,11 @@ test('fromJcamp', () => {
   expect(first.variables.y.label).toBe('Reflectance');
   expect(first.variables.y.units).toBe(undefined);
 
-  const spectrumTauc = analysis.getXYSpectrum({ variables: 'c vs e' })
-  const normalizedTauc = getNormalizedSpectrum(spectrumTauc, { from: 2.5, to: 3.5 }).variables;
+  const spectrumTauc = analysis.getXYSpectrum({ variables: 'c vs e' });
+  const normalizedTauc = getNormalizedSpectrum(spectrumTauc, {
+    from: 2.5,
+    to: 3.5,
+  }).variables;
   expect(normalizedTauc.x.data).toHaveLength(141);
   expect(normalizedTauc.y.data).toHaveLength(141);
-
 });

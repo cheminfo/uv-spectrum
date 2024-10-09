@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { test, expect } from 'vitest'
+import { test, expect } from 'vitest';
 
 import { fromText } from '../..';
 
@@ -18,7 +18,6 @@ test('fromText', () => {
   });
 
   expect(analysis.spectra).toHaveLength(1);
-
 
   let first = analysis.spectra[0];
 
