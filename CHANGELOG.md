@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/cheminfo/uv-spectrum/compare/v0.6.0...v0.7.0) (2024-11-14)
+
+
+### Features
+
+* update dependencies and force new build for filtes ([1914dba](https://github.com/cheminfo/uv-spectrum/commit/1914dbac27ac2617fe55166787cc756034bee1b8))
+
 ## [0.6.0](https://github.com/cheminfo/uv-spectrum/compare/v0.5.0...v0.6.0) (2024-10-09)
 
 
