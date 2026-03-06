@@ -1,15 +1,3 @@
-import cheminfo from 'eslint-config-cheminfo';
+import cheminfo from 'eslint-config-cheminfo-typescript';
 
-export default [
-  ...cheminfo,
-  {
-    languageOptions: {
-      globals: {
-        __dirname: 'readonly',
-      },
-    },
-    rules: {
-      //      "camelcase": "off",
-    },
-  },
-];
+export default [...cheminfo];
