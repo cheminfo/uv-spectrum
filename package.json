@@ -36,6 +36,7 @@
   "homepage": "https://github.com/cheminfo/uv-spectrum#readme",
   "dependencies": {
     "common-spectrum": "3.2.0",
+    "ensure-string": "^2.0.0",
     "ml-gsd": "^13.1.1"
   },
   "devDependencies": {

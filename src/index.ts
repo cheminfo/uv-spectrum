@@ -12,6 +12,7 @@ export {
   toText,
 } from 'common-spectrum';
 
+export { fromCaryEclipseCSV } from './from/fromCaryEclipseCSV.ts';
 export { fromJcamp } from './from/fromJcamp.ts';
 export { fromText } from './from/fromText.ts';
 
