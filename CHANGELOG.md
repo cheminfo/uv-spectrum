@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/cheminfo/uv-spectrum/compare/v0.7.0...v0.8.0) (2026-03-17)
+
+
+### Features
+
+* add Cary Eclipse CSV parser ([b4606ee](https://github.com/cheminfo/uv-spectrum/commit/b4606ee08c32656f5746d81f5bb0c228bc45bf84))
+
 ## [0.7.0](https://github.com/cheminfo/uv-spectrum/compare/v0.6.0...v0.7.0) (2024-11-14)
 
 
