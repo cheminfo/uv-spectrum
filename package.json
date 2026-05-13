@@ -1,7 +1,7 @@
 {
   "name": "uv-spectrum",
   "version": "0.7.0",
-  "description": "",
+  "description": "Parse and process UV-Vis absorption spectra from JCAMP-DX, plain text, and Cary Eclipse CSV files.",
   "type": "module",
   "exports": {
     ".": "./lib/index.js"
@@ -28,7 +28,16 @@
     "type": "git",
     "url": "git+https://github.com/cheminfo/uv-spectrum.git"
   },
-  "keywords": [],
+  "keywords": [
+    "uv",
+    "uv-vis",
+    "spectroscopy",
+    "absorbance",
+    "spectrum",
+    "jcamp-dx",
+    "cary-eclipse",
+    "cheminfo"
+  ],
   "author": "Luc Patiny",
   "license": "MIT",
   "bugs": {
