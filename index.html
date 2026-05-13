@@ -1,442 +1,105 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset='utf-8'>
-  <title>uv-spectrum 0.7.0 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' rel='stylesheet'>
-  <link href='assets/style.css' rel='stylesheet'>
-  <link href='assets/github.css' rel='stylesheet'>
-  <link href='assets/split.css' rel='stylesheet'>
-</head>
-<body class='documentation m0'>
-    <div class='flex'>
-      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
-        <div class='py1 px2'>
-          <h3 class='mb0 no-anchor'>uv-spectrum</h3>
-          <div class='mb1'><code>0.7.0</code></div>
-          <input
-            placeholder='Filter'
-            id='filter-input'
-            class='col12 block input'
-            spellcheck='false'
-            autocapitalize='off'
-            autocorrect='off'
-            type='text' />
-          <div id='toc'>
-            <ul class='list-reset h5 py1-ul'>
-              
-                
-                <li><a
-                  href='#fromjcamp'
-                  class="">
-                  fromJcamp
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#getannotations'
-                  class="">
-                  getAnnotations
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#peak'
-                  class="">
-                  Peak
-                  
-                </a>
-                
-                </li>
-              
-            </ul>
-          </div>
-          <div class='mt1 h6 quiet'>
-            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
-          </div>
-        </div>
-      </div>
-      <div id='split-right' class='relative overflow-auto height-viewport-100'>
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>uv-spectrum</title><meta name="description" content="Documentation for uv-spectrum"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">uv-spectrum</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>uv-spectrum</h1></div><div class="tsd-panel tsd-typography"><h1 id="uv-spectrum" class="tsd-anchor-link">uv-spectrum<a href="#uv-spectrum" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><a href="https://www.npmjs.com/package/uv-spectrum"><img src="https://img.shields.io/npm/v/uv-spectrum.svg?style=flat-square" alt="NPM version"></a>
+<a href="https://codecov.io/gh/cheminfo/uv-spectrum"><img src="https://img.shields.io/codecov/c/github/cheminfo/uv-spectrum.svg?style=flat-square" alt="Test coverage"></a>
+<a href="https://www.npmjs.com/package/uv-spectrum"><img src="https://img.shields.io/npm/dm/uv-spectrum.svg?style=flat-square" alt="npm download"></a></p>
+<p>Parse and process UV-Vis absorption spectra. The package wraps <a href="https://github.com/cheminfo/common-spectrum"><code>common-spectrum</code></a> with UV-specific variable derivation and ships readers for JCAMP-DX, plain-text two-column data, and Cary Eclipse CSV files.</p>
+<h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><code>$ npm install --save uv-spectrum</code></p>
+<h2 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">fromJcamp</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;uv-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">analysis</span><span class="hl-1"> = </span><span class="hl-6">fromJcamp</span><span class="hl-1">(</span><span class="hl-2">jcamp</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
 
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='fromjcamp'>
-      fromJcamp
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/uv-spectrum/blob/eeb452262ef706be7b12ad6171cfb80da3dba5bf/src/from/fromJcamp.js#L14-L16'>
-      <span>src/from/fromJcamp.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates a new Analysis from a SPC buffer</p>
-
-    <div class='pre p1 fill-light mt0'>fromJcamp(jcamp: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>), options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): Analysis</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>jcamp</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>))</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-            = <code>{}</code>)</code>
-	    
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-  
-    (default <code>Math.random()</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+<p>Other readers exposed by the package: <code>fromText</code> and <code>fromCaryEclipseCSV</code>. Core helpers re-exported from <code>common-spectrum</code> (<code>Analysis</code>, <code>AnalysesManager</code>, <code>autoPeakPicking</code>, <code>peakPicking</code>, <code>toJcamp</code>, <code>toMatrix</code>, <code>toText</code>) are also importable from <code>uv-spectrum</code>.</p>
+<p>When loading a UV-Vis spectrum, additional variables are derived from the y axis depending on its label:</p>
+<h3 id="absorbance-transmittance-input" class="tsd-anchor-link">Absorbance / transmittance input<a href="#absorbance-transmittance-input" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Label</th>
+<th>Units</th>
+<th>Description</th>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.label</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>options.id</code>)
-  </td>
-  <td class='break-word'><span>human redeable label
-</span></td>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Wavelength</td>
+<td>nm</td>
+<td>Wavelength from the source file</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.spectrumCallback</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?</code>
-  </td>
-  <td class='break-word'><span>a callback to apply on variables when creating spectrum. Default will add a and t
-</span></td>
+<tr>
+<td>y</td>
+<td>(from source file)</td>
+<td></td>
+<td>Original y-axis data</td>
 </tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>Analysis</code>:
-        New class element with the given data
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='getannotations'>
-      getAnnotations
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/uv-spectrum/blob/eeb452262ef706be7b12ad6171cfb80da3dba5bf/src/jsgraph/getAnnotations.js#L21-L38'>
-      <span>src/jsgraph/getAnnotations.js</span>
-      </a>
-    
-  </div>
-  
-
-  <p>Creates annotations for jsgraph that allows to display the result of peak picking</p>
-
-    <div class='pre p1 fill-light mt0'>getAnnotations(peaks: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#peak">Peak</a>>, options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): any</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>peaks</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#peak">Peak</a>>)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-            = <code>{}</code>)</code>
-	    
-          </div>
-          
-          <table class='mt1 mb2 fixed-table h5 col-12'>
-            <colgroup>
-              <col width='30%' />
-              <col width='70%' />
-            </colgroup>
-            <thead>
-              <tr class='bold fill-light'>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody class='mt1'>
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.fillColor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;green&#39;</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+<tr>
+<td>a</td>
+<td>Absorbance</td>
+<td></td>
+<td>Absorbance values (computed from transmittance if needed)</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.strokeColor</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>&#39;red&#39;</code>)
-  </td>
-  <td class='break-word'><span></span></td>
+<tr>
+<td>t</td>
+<td>Transmittance (%)</td>
+<td></td>
+<td>Percent transmittance (computed from absorbance if needed)</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.showKind</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>true</code>)
-  </td>
-  <td class='break-word'><span>Display the kind, 'm', 'w', 'S'
-</span></td>
+</tbody>
+</table>
+<p>The conversion is automatic: if the y label contains &quot;transmittance&quot;, absorbance is computed as <code>-log10(T / factor)</code>; if it contains &quot;absorbance&quot;, transmittance is computed as <code>10^(-A) * 100</code>. For transmittance, the presence of <code>%</code> or <code>percent</code> in the label determines whether the input is already scaled to <code>0-100</code> or <code>0-1</code>.</p>
+<h3 id="reflectance-input" class="tsd-anchor-link">Reflectance input<a href="#reflectance-input" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>When the y label contains &quot;reflect&quot;, reflectance-derived quantities are added instead:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Label</th>
+<th>Units</th>
+<th>Description</th>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.showAssignment</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
-  
-    (default <code>true</code>)
-  </td>
-  <td class='break-word'><span>Display the assignment
-</span></td>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Wavelength</td>
+<td>nm</td>
+<td>Wavelength from the source file</td>
 </tr>
-
-
-              
-                <tr>
-  <td class='break-word'><span class='code bold'>options.createFct</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?</code>
-  </td>
-  <td class='break-word'><span>(annotation, peak) => {}: callback allowing to add properties
-</span></td>
+<tr>
+<td>y</td>
+<td>(from source file)</td>
+<td></td>
+<td>Original reflectance data</td>
 </tr>
-
-
-              
-            </tbody>
-          </table>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-    
-      <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
-        array
-
-      
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='peak'>
-      Peak
-    </h3>
-    
-    
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/cheminfo/uv-spectrum/blob/eeb452262ef706be7b12ad6171cfb80da3dba5bf/src/jsgraph/getAnnotations.js#L1-L7'>
-      <span>src/jsgraph/getAnnotations.js</span>
-      </a>
-    
-  </div>
-  
-
-  
-    <div class='pre p1 fill-light mt0'>Peak</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>wavelength</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>absorbance</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>kind</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>assignment</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-      </div>
-    </div>
-  <script src='assets/anchor.js'></script>
-  <script src='assets/split.js'></script>
-  <script src='assets/site.js'></script>
-</body>
-</html>
+<tr>
+<td>r</td>
+<td>Reflectance</td>
+<td></td>
+<td>Copy of the original reflectance values</td>
+</tr>
+<tr>
+<td>k</td>
+<td>F(R)</td>
+<td></td>
+<td>Kubelka-Munk function: <code>(1 - R)^2 / (2 R)</code></td>
+</tr>
+<tr>
+<td>e</td>
+<td>Energy</td>
+<td>eV</td>
+<td>Photon energy converted from wavelength</td>
+</tr>
+<tr>
+<td>c</td>
+<td><code>(F(R) / 100 * h * v / e)^(1/2)</code></td>
+<td>Arbitrary units</td>
+<td>Tauc plot quantity (direct-allowed transition, factor 2)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api-documentation" class="tsd-anchor-link"><a href="https://cheminfo.github.io/uv-spectrum/">API Documentation</a><a href="#api-documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p><a href="media/LICENSE">MIT</a></p>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#uv-spectrum"><span>uv-<wbr/>spectrum</span></a><ul><li><a href="#installation"><span>Installation</span></a></li><li><a href="#usage"><span>Usage</span></a></li><li><ul><li><a href="#absorbance-transmittance-input"><span>Absorbance / transmittance input</span></a></li><li><a href="#reflectance-input"><span>Reflectance input</span></a></li></ul></li><li><a href="#api-documentation"><span>API <wbr/>Documentation</span></a></li><li><a href="#license"><span>License</span></a></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">uv-spectrum</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer></footer><div class="overlay"></div></body></html>
