@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/cheminfo/uv-spectrum/compare/v0.8.0...v0.9.0) (2026-10-21)
+
+
+### Features
+
+* add from, fromSPC and fromSP readers ([5bb0251](https://github.com/cheminfo/uv-spectrum/commit/5bb0251056b72bfb06c936547811a26303e77064))
+
+
+### Bug Fixes
+
+* require spc-parser 3.1.0 for PerkinElmer .sp support ([fc72dfb](https://github.com/cheminfo/uv-spectrum/commit/fc72dfb95c21b1f5de99e880b352e48d78c3e523))
+
 ## [0.8.0](https://github.com/cheminfo/uv-spectrum/compare/v0.7.0...v0.8.0) (2026-05-13)
 
 
