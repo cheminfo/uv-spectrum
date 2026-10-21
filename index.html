@@ -2,15 +2,46 @@
 <p><a href="https://www.npmjs.com/package/uv-spectrum"><img src="https://img.shields.io/npm/v/uv-spectrum.svg?style=flat-square" alt="NPM version"></a>
 <a href="https://codecov.io/gh/cheminfo/uv-spectrum"><img src="https://img.shields.io/codecov/c/github/cheminfo/uv-spectrum.svg?style=flat-square" alt="Test coverage"></a>
 <a href="https://www.npmjs.com/package/uv-spectrum"><img src="https://img.shields.io/npm/dm/uv-spectrum.svg?style=flat-square" alt="npm download"></a></p>
-<p>Parse and process UV-Vis absorption spectra. The package wraps <a href="https://github.com/cheminfo/common-spectrum"><code>common-spectrum</code></a> with UV-specific variable derivation and ships readers for JCAMP-DX, plain-text two-column data, and Cary Eclipse CSV files.</p>
+<p>Parse and process UV-Vis absorption spectra. The package wraps <a href="https://github.com/cheminfo/common-spectrum"><code>common-spectrum</code></a> with UV-specific variable derivation and ships readers for JCAMP-DX, SPC (Thermo Galactic, Shimadzu UVProbe), PerkinElmer SP, plain-text two-column data, and Cary Eclipse CSV files.</p>
 <h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p><code>$ npm install --save uv-spectrum</code></p>
+<p><code>$ npm i uv-spectrum</code></p>
 <h2 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">fromJcamp</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;uv-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">analysis</span><span class="hl-1"> = </span><span class="hl-6">fromJcamp</span><span class="hl-1">(</span><span class="hl-2">jcamp</span><span class="hl-1">);</span>
+<pre><code class="js"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">readFileSync</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;node:fs&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">from</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;uv-spectrum&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">analysis</span><span class="hl-1"> = </span><span class="hl-6">from</span><span class="hl-1">(</span><span class="hl-6">readFileSync</span><span class="hl-1">(</span><span class="hl-3">&#39;spectrum.jdx&#39;</span><span class="hl-1">));</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">spectrum</span><span class="hl-1"> = </span><span class="hl-2">analysis</span><span class="hl-1">.</span><span class="hl-6">getXYSpectrum</span><span class="hl-1">();</span>
 </code><button type="button">Copy</button></pre>
 
-<p>Other readers exposed by the package: <code>fromText</code> and <code>fromCaryEclipseCSV</code>. Core helpers re-exported from <code>common-spectrum</code> (<code>Analysis</code>, <code>AnalysesManager</code>, <code>autoPeakPicking</code>, <code>peakPicking</code>, <code>toJcamp</code>, <code>toMatrix</code>, <code>toText</code>) are also importable from <code>uv-spectrum</code>.</p>
-<p>When loading a UV-Vis spectrum, additional variables are derived from the y axis depending on its label:</p>
+<p><code>from(data, options)</code> recognises the format from the content of the file, never from its name, and calls the matching reader below: JCAMP-DX first, then the spc-parser formats, then a Cary Eclipse CSV export, and otherwise CSV / TSV text. <code>options.jcamp</code>, <code>options.spc</code> and <code>options.text</code> are forwarded to the reader that is used.</p>
+<table>
+<thead>
+<tr>
+<th>Reader</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fromJcamp(data, options)</code></td>
+<td>JCAMP-DX</td>
+</tr>
+<tr>
+<td><code>fromText(data, options)</code></td>
+<td>CSV / TSV text</td>
+</tr>
+<tr>
+<td><code>fromCaryEclipseCSV(data)</code></td>
+<td>Cary Eclipse CSV export, one spectrum per sample</td>
+</tr>
+<tr>
+<td><code>fromSPC(data, options)</code></td>
+<td>Thermo Galactic GRAMS and Shimadzu UVProbe <code>.spc</code>, PerkinElmer <code>.sp</code> (binary or ASCII, whatever the extension), auto-detected</td>
+</tr>
+<tr>
+<td><code>fromSP(data, options)</code></td>
+<td>PerkinElmer <code>.sp</code>, same as <code>fromSPC</code></td>
+</tr>
+</tbody>
+</table>
+<p>The package also re-exports <code>Analysis</code>, <code>AnalysesManager</code>, <code>autoPeakPicking</code>, <code>peakPicking</code>, <code>toJcamp</code>, <code>toMatrix</code>, <code>toText</code> and <code>JSGraph</code> from common-spectrum.</p>
+<p>Every reader returns a common-spectrum <code>Analysis</code>, and each spectrum gets variables derived from its y axis, depending on its label:</p>
 <h3 id="absorbance-transmittance-input" class="tsd-anchor-link">Absorbance / transmittance input<a href="#absorbance-transmittance-input" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <table>
 <thead>
@@ -48,7 +79,7 @@
 </tr>
 </tbody>
 </table>
-<p>The conversion is automatic: if the y label contains &quot;transmittance&quot;, absorbance is computed as <code>-log10(T / factor)</code>; if it contains &quot;absorbance&quot;, transmittance is computed as <code>10^(-A) * 100</code>. For transmittance, the presence of <code>%</code> or <code>percent</code> in the label determines whether the input is already scaled to <code>0-100</code> or <code>0-1</code>.</p>
+<p>The conversion is automatic: if the y label contains &quot;transmittance&quot;, absorbance is computed as <code>-log10(T / factor)</code>; if it contains &quot;absorbance&quot;, transmittance is computed as <code>10^(-A) * 100</code>. For transmittance, a <code>%</code> or <code>percent</code> in the label, or <code>%</code> as the units, determines whether the input is already scaled to <code>0-100</code> or <code>0-1</code>.</p>
 <h3 id="reflectance-input" class="tsd-anchor-link">Reflectance input<a href="#reflectance-input" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <p>When the y label contains &quot;reflect&quot;, reflectance-derived quantities are added instead:</p>
 <table>
