@@ -4,23 +4,36 @@
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
-Parse and process UV-Vis absorption spectra. The package wraps [`common-spectrum`](https://github.com/cheminfo/common-spectrum) with UV-specific variable derivation and ships readers for JCAMP-DX, plain-text two-column data, and Cary Eclipse CSV files.
+Parse and process UV-Vis absorption spectra. The package wraps [`common-spectrum`](https://github.com/cheminfo/common-spectrum) with UV-specific variable derivation and ships readers for JCAMP-DX, SPC (Thermo Galactic, Shimadzu UVProbe), PerkinElmer SP, plain-text two-column data, and Cary Eclipse CSV files.
 
 ## Installation
 
-`$ npm install --save uv-spectrum`
+`$ npm i uv-spectrum`
 
 ## Usage
 
 ```js
-import { fromJcamp } from 'uv-spectrum';
+import { readFileSync } from 'node:fs';
 
-const analysis = fromJcamp(jcamp);
+import { from } from 'uv-spectrum';
+
+const analysis = from(readFileSync('spectrum.jdx'));
+const spectrum = analysis.getXYSpectrum();
 ```
 
-Other readers exposed by the package: `fromText` and `fromCaryEclipseCSV`. Core helpers re-exported from `common-spectrum` (`Analysis`, `AnalysesManager`, `autoPeakPicking`, `peakPicking`, `toJcamp`, `toMatrix`, `toText`) are also importable from `uv-spectrum`.
+`from(data, options)` recognises the format from the content of the file, never from its name, and calls the matching reader below: JCAMP-DX first, then the spc-parser formats, then a Cary Eclipse CSV export, and otherwise CSV / TSV text. `options.jcamp`, `options.spc` and `options.text` are forwarded to the reader that is used.
 
-When loading a UV-Vis spectrum, additional variables are derived from the y axis depending on its label:
+| Reader                     | Format                                                                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `fromJcamp(data, options)` | JCAMP-DX                                                                                                                      |
+| `fromText(data, options)`  | CSV / TSV text                                                                                                                |
+| `fromCaryEclipseCSV(data)` | Cary Eclipse CSV export, one spectrum per sample                                                                              |
+| `fromSPC(data, options)`   | Thermo Galactic GRAMS and Shimadzu UVProbe `.spc`, PerkinElmer `.sp` (binary or ASCII, whatever the extension), auto-detected |
+| `fromSP(data, options)`    | PerkinElmer `.sp`, same as `fromSPC`                                                                                          |
+
+The package also re-exports `Analysis`, `AnalysesManager`, `autoPeakPicking`, `peakPicking`, `toJcamp`, `toMatrix`, `toText` and `JSGraph` from common-spectrum.
+
+Every reader returns a common-spectrum `Analysis`, and each spectrum gets variables derived from its y axis, depending on its label:
 
 ### Absorbance / transmittance input
 
@@ -31,7 +44,7 @@ When loading a UV-Vis spectrum, additional variables are derived from the y axis
 | a   | Absorbance         |       | Absorbance values (computed from transmittance if needed)  |
 | t   | Transmittance (%)  |       | Percent transmittance (computed from absorbance if needed) |
 
-The conversion is automatic: if the y label contains "transmittance", absorbance is computed as `-log10(T / factor)`; if it contains "absorbance", transmittance is computed as `10^(-A) * 100`. For transmittance, the presence of `%` or `percent` in the label determines whether the input is already scaled to `0-100` or `0-1`.
+The conversion is automatic: if the y label contains "transmittance", absorbance is computed as `-log10(T / factor)`; if it contains "absorbance", transmittance is computed as `10^(-A) * 100`. For transmittance, a `%` or `percent` in the label, or `%` as the units, determines whether the input is already scaled to `0-100` or `0-1`.
 
 ### Reflectance input
 

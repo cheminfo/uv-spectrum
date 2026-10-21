@@ -89,6 +89,7 @@ function parseAbsorbance(variables: MeasurementXYVariables) {
   } else {
     const factor =
       yVariable.label?.includes('%') ||
+      yVariable.units === '%' ||
       yVariable.label?.toLowerCase().includes('percent')
         ? 100
         : 1;

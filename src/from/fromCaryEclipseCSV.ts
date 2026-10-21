@@ -35,10 +35,12 @@ export function fromCaryEclipseCSV(data: TextData): Analysis {
     for (const row of dataRows) {
       const xValue = row[sampleIndex * 2];
       const yValue = row[sampleIndex * 2 + 1];
-      if (xValue !== undefined && yValue !== undefined) {
-        xData.push(xValue);
-        yData.push(yValue);
+      if (xValue === undefined || yValue === undefined) {
+        continue;
       }
+
+      xData.push(xValue);
+      yData.push(yValue);
     }
 
     const sampleName = sampleNames[sampleIndex] ?? `Sample ${sampleIndex + 1}`;
@@ -83,9 +85,8 @@ function parseHeader(lines: string[]): {
 function findDataEnd(lines: string[]): number {
   for (let i = 2; i < lines.length; i++) {
     const line = lines[i]?.trim() ?? '';
-    if (line === '') return i;
-    // Check if line starts with a number (data row)
-    if (!/^\d/.test(line)) return i;
+    // An empty line or one not starting with a number ends the data rows
+    if (line === '' || !/^\d/.test(line)) return i;
   }
   return lines.length;
 }
@@ -156,12 +157,11 @@ function parseMetadataBlocks(
     const spacedMatch = /^(?<key>\S[\s\S]*?)\s{2,}(?<value>\S[\s\S]*)$/.exec(
       trimmed,
     );
-    if (spacedMatch?.groups) {
-      const key = spacedMatch.groups.key?.trim();
-      const value = spacedMatch.groups.value?.trim();
-      if (key && value) {
-        currentMeta[key] = value;
-      }
+    if (!spacedMatch?.groups) continue;
+    const key = spacedMatch.groups.key?.trim();
+    const value = spacedMatch.groups.value?.trim();
+    if (key && value) {
+      currentMeta[key] = value;
     }
   }
 

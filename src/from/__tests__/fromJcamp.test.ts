@@ -7,7 +7,7 @@ import { assert, expect, test } from 'vitest';
 import { fromJcamp } from '../../index.ts';
 
 test('fromJcamp', () => {
-  const data = readFileSync(join(import.meta.dirname, 'data/uv.jdx')).buffer;
+  const data = readFileSync(join(import.meta.dirname, 'data/uv.jdx'));
   const analysis = fromJcamp(data, {
     info: {
       xUnits: 'cm-1',
