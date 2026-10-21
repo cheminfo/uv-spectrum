@@ -1,6 +1,6 @@
 {
   "name": "uv-spectrum",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Parse and process UV-Vis absorption spectra from JCAMP-DX, SPC, PerkinElmer SP, plain text, and Cary Eclipse CSV files.",
   "type": "module",
   "exports": {
