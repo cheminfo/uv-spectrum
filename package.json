@@ -51,7 +51,7 @@
     "common-spectrum": "4.0.1",
     "ensure-string": "^2.0.0",
     "ml-gsd": "^14.3.0",
-    "spc-parser": "^3.0.0"
+    "spc-parser": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
