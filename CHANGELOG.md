@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/cheminfo/uv-spectrum/compare/v0.9.0...v0.9.1) (2026-11-11)
+
+
+### Bug Fixes
+
+* deal correctly with fluorescence spectra and fromText should also  generate derived variables ([c8b778c](https://github.com/cheminfo/uv-spectrum/commit/c8b778cae441c1fca534571ce8c97a1f13d3566c))
+
 ## [0.9.0](https://github.com/cheminfo/uv-spectrum/compare/v0.8.0...v0.9.0) (2026-10-21)
 
 
