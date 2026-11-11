@@ -54,3 +54,17 @@ test('fromText roundtrip via toJcamp', () => {
 
   expect(first.dataType).toBe('UV spectrum');
 });
+
+test('fromText derives absorbance and transmittance from an unlabelled column', () => {
+  const analysis = fromText('200 0.1\n201 1\n202 2\n');
+  const first = analysis.spectra[0];
+  assert(first !== undefined);
+
+  expect(Object.keys(first.variables)).toStrictEqual(['x', 'y', 'a', 't']);
+  expect(Array.from(first.variables.a?.data ?? [])).toStrictEqual([0.1, 1, 2]);
+  expect(Array.from(first.variables.t?.data ?? [])).toStrictEqual([
+    10 ** -0.1 * 100,
+    10,
+    1,
+  ]);
+});

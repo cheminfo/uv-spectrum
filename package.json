@@ -54,16 +54,16 @@
     "spc-parser": "^3.1.0"
   },
   "devDependencies": {
-    "@types/node": "^26.6.5",
-    "@vitest/coverage-v8": "^4.1.12",
+    "@types/node": "^26.6.6",
+    "@vitest/coverage-v8": "^5.1.0",
     "@zakodium/tsconfig": "^1.0.5",
     "cheminfo-build": "^1.4.0",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "eslint-config-cheminfo-typescript": "^23.0.0",
     "prettier": "^3.9.10",
-    "rimraf": "^6.1.3",
+    "rimraf": "^6.1.4",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.12"
+    "vitest": "^5.1.0"
   },
   "info": {
     "logo": "https://raw.githubusercontent.com/cheminfo/font/main/src/uv/assignment.svg",

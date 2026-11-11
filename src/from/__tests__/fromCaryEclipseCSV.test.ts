@@ -18,13 +18,15 @@ test('fromCaryEclipseCSV', () => {
   assert(blank !== undefined);
 
   expect(blank.title).toBe('Blank f');
-  expect(blank.dataType).toBe('UV spectrum');
+  expect(blank.dataType).toBe('FLUORESCENCE SPECTRUM');
   expect(blank.variables.x.data).toHaveLength(151);
   expect(blank.variables.y.data).toHaveLength(151);
   expect(blank.variables.x.label).toBe('Wavelength');
   expect(blank.variables.x.units).toBe('nm');
   expect(blank.variables.y.label).toBe('Intensity');
   expect(blank.variables.y.units).toBe('a.u.');
+  // An emitted intensity is no absorbance, so none is derived from it.
+  expect(Object.keys(blank.variables)).toStrictEqual(['x', 'y']);
 
   // Check meta from first metadata block
   expect(blank.meta?.Instrument).toBe('Cary Eclipse');
@@ -57,4 +59,23 @@ test('fromCaryEclipseCSV', () => {
 
   expect(sample3.title).toBe('Sample3-3');
   expect(sample3.meta?.['Collection Time']).toBe('26/02/2026 16:31:52');
+});
+
+test('a Cary absorbance export stays a UV spectrum, absorbance derived', () => {
+  const csv = [
+    'Sample1,',
+    'Wavelength (nm),Abs',
+    '300,0.5',
+    '301,0.6',
+    '',
+    'Sample1',
+    'Data mode,Abs',
+  ].join('\n');
+  const [spectrum] = fromCaryEclipseCSV(csv).spectra;
+  assert(spectrum !== undefined);
+
+  expect(spectrum.dataType).toBe('UV spectrum');
+  expect(Array.from(spectrum.variables.a?.data ?? [])).toStrictEqual([
+    0.5, 0.6,
+  ]);
 });

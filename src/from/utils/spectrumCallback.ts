@@ -10,12 +10,19 @@ const SPEED_OF_LIGHT = 299792458; // speed of light (m / s)
  * @param variables - The spectrum variables with at least x and y.
  */
 export function spectrumCallback(variables: MeasurementXYVariables) {
-  if (variables.y.label?.toLowerCase().includes('reflect')) {
+  const label = variables.y.label?.toLowerCase() ?? '';
+  if (label.includes('reflect')) {
     parseReflectance(variables);
-  } else {
+  } else if (!EMITTED.test(label)) {
     parseAbsorbance(variables);
   }
 }
+
+/**
+ * The y labels of light a sample emits — a fluorometer's intensity, counts —
+ * from which no absorbance or transmittance can be derived.
+ */
+const EMITTED = /intensity|fluoresc|phosphoresc|luminesc|emission|counts/;
 
 function parseReflectance(variables: MeasurementXYVariables) {
   const yData = Array.from(variables.y.data);

@@ -52,7 +52,7 @@ export function fromCaryEclipseCSV(data: TextData): Analysis {
         y: { data: yData, label: yLabel, units: yUnits },
       },
       {
-        dataType: 'UV spectrum',
+        dataType: dataTypeOf(meta),
         title: sampleName,
         meta,
       },
@@ -61,6 +61,27 @@ export function fromCaryEclipseCSV(data: TextData): Analysis {
 
   return analysis;
 }
+
+/**
+ * What a sample was measured as. A Cary Eclipse is a fluorometer, and its
+ * `Data mode` says fluorescence, phosphorescence or luminescence; Cary's UV-vis
+ * software writes the same layout with an absorbance column, which stays a UV
+ * spectrum.
+ * @param meta - The sample's instrument parameters.
+ * @returns The data type, e.g. `FLUORESCENCE SPECTRUM` or `UV spectrum`.
+ */
+function dataTypeOf(meta: Record<string, unknown>): string {
+  const mode = meta['Data mode'];
+  if (typeof mode !== 'string' || !EMISSION_MODES.test(mode)) {
+    return 'UV spectrum';
+  }
+  return `${mode.trim().toUpperCase()} SPECTRUM`;
+}
+
+/**
+ * The data modes of light a sample emits.
+ */
+const EMISSION_MODES = /fluoresc|phosphoresc|luminesc/i;
 
 function parseHeader(lines: string[]): {
   sampleNames: string[];

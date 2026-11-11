@@ -46,6 +46,10 @@ Every reader returns a common-spectrum `Analysis`, and each spectrum gets variab
 
 The conversion is automatic: if the y label contains "transmittance", absorbance is computed as `-log10(T / factor)`; if it contains "absorbance", transmittance is computed as `10^(-A) * 100`. For transmittance, a `%` or `percent` in the label, or `%` as the units, determines whether the input is already scaled to `0-100` or `0-1`.
 
+### Emission input
+
+When the y label names light the sample emits — an intensity, counts, fluorescence, phosphorescence, luminescence, emission — no variable is derived: an emitted intensity is no absorbance. A Cary Eclipse export is typed by its `Data mode`, e.g. `FLUORESCENCE SPECTRUM`.
+
 ### Reflectance input
 
 When the y label contains "reflect", reflectance-derived quantities are added instead:

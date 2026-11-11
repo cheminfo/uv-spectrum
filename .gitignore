@@ -16,3 +16,5 @@ lib
 dist
 .DS_Store
 .claude
+
+.deploy
